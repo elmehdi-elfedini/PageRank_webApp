@@ -4,4 +4,4 @@ lxml==4.9.1
 networkx==3.0
 Gunicorn
 numpy
-
+scipy
