@@ -1,0 +1,67 @@
+{% include "header.html" %}
+
+</head>
+
+<body class="index-page" data-bs-spy="scroll" data-bs-target="#navmenu">
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+
+      <a href="/" class="logo d-flex align-items-center me-auto me-xl-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>Midvi</h1>
+        <span>.</span>
+      </a>
+
+      <!-- Nav Menu -->
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <!-- <li><a href="/index"   class="active"></a></li> -->
+          <!-- <li><a href="/result">Result</a></li> -->
+        </ul>
+
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+      
+      <!-- End Nav Menu -->
+
+      <a class="btn-getstarted" href="/index"><h6 class="p-1 my-1">Page Rank Simulator </h6></a>
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- Hero Section - Home Page -->
+    <section id="hero" class="hero">
+
+      <!-- <img src="assets/img/hero-bg.jpg" alt="" data-aos="fade-in"> -->
+
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10">
+            <h2 data-aos="fade-up" data-aos-delay="100"> Google’s PageRank – Calculator            </h2>
+            <p data-aos="fade-up" data-aos-delay="200">PageRank is an algorithm developed by Larry Page and Sergey Brin, the co-founders of Google, as a way to measure the importance of web pages in a network of hyperlinked documents. It forms the basis for Google's search engine.</p>
+          </div>
+          <div class="col-lg-5">
+            <form method="POST" enctype="multipart/form-data"  class="sign-up-form d-flex" data-aos="fade-up" data-aos-delay="300">
+              <input type="file" name="file" class="form-control" placeholder="Upload an XML File">
+              <input type="submit" class="btn btn-primary" value="Upload">
+            </form>
+          </div>
+          <p data-aos="fade-up" data-aos-delay="200">Please Select just an XML file </p>
+
+        </div>
+      </div>
+      
+
+    </section><!-- End Hero Section -->
+
+    {% include "footer.html" %}
+
+
+</body>
+
+</html>

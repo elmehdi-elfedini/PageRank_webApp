@@ -1,0 +1,167 @@
+{% include "header.html" %}
+
+<body class="index-page" data-bs-spy="scroll" data-bs-target="#navmenu">
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+
+      <a href="/" class="logo d-flex align-items-center me-auto me-xl-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1>Midvi</h1>
+        <span>.</span>
+      </a>
+
+      <!-- Nav Menu -->
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <!-- <li><a href="/home" class="active">Home</a></li> -->
+          <!-- <li><a href="/result">Result</a></li> -->
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+      
+      <!-- End Nav Menu -->
+
+      <a class="btn-getstarted" href="/">Home Page</a>
+
+    </div>
+  </header><!-- End Header -->
+  <main id="main">
+    <!-- Hero Section - Home Page -->
+    <section id="hero" >
+      <!-- <img src="assets/img/hero-bg.jpg" alt="" data-aos="fade-in"> -->
+      <div class="container p-5 ">
+   
+    <h1>PageRank Result Network  Visualization</h1>
+    <div id="network"></div>
+    <h1 class="mt-5 mb-4">PageRank Result</h1>
+    <ul class="list-group">
+      <table class="table">
+        <tr>   <th>Page Name</th>
+        <th>PageRank Score</th></tr>
+     
+    
+        {% for node, rank in pagerank.items() %}
+        <tr>
+        <td><strong>Page &nbsp;<span class="badge bg-secondary">{{ node }}</span></strong></td>
+        <td> {{ rank*100 }}</td></tr>
+        {% endfor %}
+      </table>
+    </ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+    {{node}}
+    <script>
+    
+        var nodes = {{ nodes | tojson|safe }};
+        var edges = {{ edges | tojson|safe }};
+        var pagerank = {{ pagerank | tojson|safe }};
+
+        // Add PageRank value to node labels
+        for (var i = 0; i < nodes.length; i++) {
+            var node = nodes[i];
+            var nodeId = node.id;
+            node.label = 'Node ' + nodeId + '\nPageRank: ' + 100*pagerank[nodeId].toFixed(3);
+        }
+        var container = document.getElementById('network');
+        var data = {
+            nodes: new vis.DataSet(nodes),
+            edges: new vis.DataSet(edges)
+        };
+        var options = {
+            nodes: {
+                shape: 'box',  //'dot', // Change node shape to a box
+                size: 30,
+                font: {
+                    size: 14,
+                    color: 'black'
+                },
+                borderWidth: 2,
+                color: {
+                    background: 'white',
+                    border: 'black'
+                }
+            },
+            edges: {
+              shadow: true,
+              smooth: true,
+              background: {
+                enabled: true,
+                color: "#ff0000",
+              },
+                width: 2,
+                color: 'gray',
+                arrows: 'to' // Set arrows to 'to' for directed edges
+            },
+            layout: {
+                improvedLayout: true
+            }
+        };
+
+        var network = new vis.Network(container, data, options);
+
+        var pagerankDiv = document.getElementById('pagerank');
+        for (var node in pagerank) {
+            pagerankDiv.innerHTML += 'Node ' + node + ': ' + pagerank[node].toFixed(3) + '<br>';
+        }
+    </script>
+
+     <div class="p-2">
+      <button class="bn632-hover bn28" id="download-button" href="#">Download CSV </button>
+     </div>
+
+    <script>
+      function downloadCSV() {
+    // Create a CSV header
+    var csvContent = "Node,PageRank\n";
+
+    // Add data for each node
+    for (var node in pagerank) {
+        csvContent += node + "," + pagerank[node].toFixed(3) + "\n";
+    }
+
+    // Create a Blob containing the CSV data
+    var blob = new Blob([csvContent], { type: 'text/csv' });
+
+    // Create a download link
+    var a = document.createElement('a');
+    a.href = window.URL.createObjectURL(blob);
+    a.download = 'pagerank.csv';
+
+    // Simulate a click event on the link to initiate the download
+    a.click();
+}
+
+// Event listener for the "Download CSV" button
+var downloadButton = document.getElementById('download-button');
+downloadButton.addEventListener('click', downloadCSV);
+
+
+      
+    </script>
+</body>
+</html>
+
+       
+    </div>
+    </section>
+    </main>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+{% include "footer.html" %}
+
+</body>
+
+</html>
