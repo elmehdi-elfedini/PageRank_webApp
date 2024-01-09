@@ -1,5 +1,5 @@
 ﻿et-xmlfile==1.1.0
-Flask==2.2.3
+Flask
 lxml==4.9.1
 networkx==3.0
 Gunicorn
